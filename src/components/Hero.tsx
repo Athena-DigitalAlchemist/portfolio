@@ -7,6 +7,13 @@ const Hero = () => {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  const heroText = [
+    'Creative',
+    'Solutions for',
+    'Modern Websites',
+    'and Brands'
+  ];
+
   useEffect(() => {
     if (!titleRef.current) return;
 
@@ -51,20 +58,17 @@ const Hero = () => {
           PORTFOLIO® / 2024
         </motion.p>
         
-        <div>
-          <h1 
-            ref={titleRef}
-            className="text-[clamp(2rem,8vw,7.5rem)] font-bold tracking-[-0.02em] leading-[0.9] uppercase"
-          >
-            Creative
-            <br />
-            Solutions for
-            <br />
-            Modern Websites
-            <br />
-            and Brands
-          </h1>
-        </div>
+        <h1 
+          ref={titleRef}
+          className="text-[clamp(2rem,8vw,7.5rem)] font-bold tracking-[-0.02em] leading-[0.9] uppercase text-black"
+        >
+          {heroText.map((line, index) => (
+            <span key={index}>
+              {line}
+              {index < heroText.length - 1 && <br />}
+            </span>
+          ))}
+        </h1>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -10,6 +10,7 @@ import ProjectPage from './pages/ProjectPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import LoadingScreen from './components/LoadingScreen';
+import CustomCursor from './components/CustomCursor';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -28,28 +29,31 @@ function App() {
   };
 
   return (
-    <Router>
-      <div className="relative bg-black min-h-screen overflow-hidden">
-        <LoadingScreen 
-          isLoading={isLoading} 
-          onAnimationComplete={handleLoadingAnimationComplete} 
-        />
-        <CurtainReveal isReady={isLoadingComplete}>
-          <div className="relative bg-white text-black">
-            <GridBackground />
-            <Header />
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/work" element={<WorkPage />} />
-              <Route path="/work/:slug" element={<ProjectPage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-            </Routes>
-            <Footer />
-          </div>
-        </CurtainReveal>
-      </div>
-    </Router>
+    <>
+      <CustomCursor />
+      <Router>
+        <div className="relative bg-black min-h-screen overflow-hidden">
+          <LoadingScreen 
+            isLoading={isLoading} 
+            onAnimationComplete={handleLoadingAnimationComplete} 
+          />
+          <CurtainReveal isReady={isLoadingComplete}>
+            <div className="relative bg-white text-black">
+              <GridBackground />
+              <Header />
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/work" element={<WorkPage />} />
+                <Route path="/work/:slug" element={<ProjectPage />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/contact" element={<ContactPage />} />
+              </Routes>
+              <Footer />
+            </div>
+          </CurtainReveal>
+        </div>
+      </Router>
+    </>
   );
 }
 

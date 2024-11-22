@@ -29,3 +29,17 @@
   display: inline-block;
   transform-origin: bottom;
 }
+
+/* Custom cursor styles */
+* {
+  cursor: none !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+}
+
+/* Allow cursor on interactive elements */
+a, button, input, textarea, [role="button"] {
+  cursor: none !important;
+}
