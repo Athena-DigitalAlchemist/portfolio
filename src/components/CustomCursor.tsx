@@ -1,27 +1,24 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import useMousePosition from '../hooks/useMousePosition';
 
 const CustomCursor = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const { x, y } = useMousePosition();
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      const isClickable = target.matches('a, button, input, [role="button"]');
+      const isClickable = target.matches('a, button, input, [role="button"], [data-hover]');
       setIsHovered(isClickable);
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseover', handleMouseOver);
-    
+    window.addEventListener('mouseout', () => setIsHovered(false));
+
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseover', handleMouseOver);
+      window.removeEventListener('mouseout', () => setIsHovered(false));
     };
   }, []);
 
@@ -31,8 +28,8 @@ const CustomCursor = () => {
       <motion.div
         className="fixed top-0 left-0 pointer-events-none z-[9999]"
         animate={{
-          x: mousePosition.x - 8,
-          y: mousePosition.y - 8,
+          x: x - 8,
+          y: y - 8,
           scale: isHovered ? 1.5 : 1
         }}
         transition={{ type: "spring", mass: 0.3, stiffness: 800, damping: 40 }}
@@ -44,8 +41,8 @@ const CustomCursor = () => {
       <motion.div
         className="fixed top-0 left-0 pointer-events-none z-[9998]"
         animate={{
-          x: mousePosition.x - 16,
-          y: mousePosition.y - 16,
+          x: x - 16,
+          y: y - 16,
           scale: isHovered ? 2 : 1
         }}
         transition={{ type: "spring", mass: 0.7, stiffness: 400, damping: 30 }}

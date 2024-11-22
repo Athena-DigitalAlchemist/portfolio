@@ -10,10 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@react-three/drei": "^9.99.5",
+    "@react-three/drei": "^9.117.3",
     "@react-three/fiber": "^8.15.16",
     "@studio-freight/lenis": "^1.0.39",
     "framer-motion": "^11.0.8",
+    "framer-motion-3d": "^11.11.17",
     "gsap": "^3.12.5",
     "lucide-react": "^0.344.0",
     "react": "^18.2.0",

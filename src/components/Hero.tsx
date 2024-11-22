@@ -2,10 +2,13 @@ import { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import SplitType from 'split-type';
 import gsap from 'gsap';
+import { useCursorHover } from '../hooks/useCursorHover';
 
 const Hero = () => {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  useCursorHover(titleRef);
 
   const heroText = [
     'Creative',
@@ -46,21 +49,12 @@ const Hero = () => {
   return (
     <section 
       ref={containerRef}
-      className="relative min-h-screen flex flex-col justify-center px-4 pt-20 overflow-hidden"
+      className="relative h-screen flex items-center px-4 overflow-hidden"
     >
-      <div className="max-w-[1400px] mx-auto">
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 2.2 }}
-          className="text-[10px] font-mono mb-16 tracking-wider"
-        >
-          PORTFOLIO® / 2024
-        </motion.p>
-        
+      <div className="max-w-[1400px] w-full mx-auto translate-y-[20vh]">
         <h1 
           ref={titleRef}
-          className="text-[clamp(2rem,8vw,7.5rem)] font-bold tracking-[-0.02em] leading-[0.9] uppercase text-black"
+          className="text-[clamp(2rem,8vw,7.5rem)] font-bold tracking-[-0.02em] leading-[0.9] uppercase text-black cursor-none mb-8"
         >
           {heroText.map((line, index) => (
             <span key={index}>
@@ -70,14 +64,14 @@ const Hero = () => {
           ))}
         </h1>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 3 }}
-          className="text-xs tracking-wider mt-16"
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 2.2 }}
+          className="text-[10px] font-mono tracking-wider"
         >
-          SCROLL TO VIEW WORK
-        </motion.div>
+          PORTFOLIO® / 2024
+        </motion.p>
       </div>
     </section>
   );
